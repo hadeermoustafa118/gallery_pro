@@ -14,9 +14,9 @@ class PhotosRepository extends BasePhotoRepository {
   PhotosRepository(this._baseRemoteDataSource);
 
   @override
-  Future<Either<Failure, Photos>> getPhotos() async {
+  Future<Either<Failure, Photos>> getPhotos(Map <String, dynamic> query) async {
     try {
-      final result = await _baseRemoteDataSource.getPhotos();
+      final result = await _baseRemoteDataSource.getPhotos(query);
       return Right(result);
     } on ServerException catch (failure) {
       return Left(
