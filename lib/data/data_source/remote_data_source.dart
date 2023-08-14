@@ -9,13 +9,13 @@ import '../../core/exception.dart';
 import '../../domain/entities/photos.dart';
 
 abstract class BaseRemoteDataSource {
-  Future<Photos> getPhotos();
+  Future<Photos> getPhotos(Map <String, dynamic> query);
 }
 
 class RemoteDataSource extends BaseRemoteDataSource {
   @override
-  Future<Photos> getPhotos() async {
-    final response = await Dio().get(AppConstants.curatedPath,
+  Future<Photos> getPhotos(Map <String, dynamic> query) async {
+    final response = await Dio().get(AppConstants.curatedPath,queryParameters: query,
         options: Options(headers: {"Authorization": AppConstants.apiKey}));
     if (response.statusCode == 200) {
       log(response.statusCode.toString());

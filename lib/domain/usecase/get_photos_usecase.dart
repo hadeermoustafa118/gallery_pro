@@ -8,7 +8,7 @@ class GetPhotosUseCase {
 
   const GetPhotosUseCase(this._basePhotoRepository);
 
-  Future<Either<Failure, Photos>> call() {
-    return _basePhotoRepository.getPhotos();
+  Future<Either<Failure, Photos>> call(Map <String, dynamic> query) {
+    return _basePhotoRepository.getPhotos(query);
   }
 }
