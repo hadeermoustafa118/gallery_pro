@@ -16,8 +16,8 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => sl<HomeCubit>()..getAllPhotos(),
       child: BlocConsumer<HomeCubit, HomeState>(
-        listener: (context, state){
-            HomeCubit.get(context).scrollChecker();
+        listener: (context, state) {
+          //  HomeCubit.get(context).scrollChecker();
         },
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
@@ -34,73 +34,75 @@ class HomeScreen extends StatelessWidget {
                         crossAxisCount: 2,
                         mainAxisSpacing: 20,
                         crossAxisSpacing: 15,
-                        itemCount: state.isLoadMore? state.photos!.photos.length+1:state.photos!.photos.length,
+                        itemCount:
+                            //state.isLoadMore? state.photos!.photos.length+1:
+                            state.photos!.photos.length,
                         itemBuilder: (BuildContext context, int index) {
-                          if(index >= state.photos!.photos.length){
-                            return const CupertinoActivityIndicator(color: Colors.orange,);
-                          }
-                          else{
-                            return Container(
-                              decoration: const BoxDecoration(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(20)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey,
-                                    offset: Offset(1, 1),
-                                    blurRadius: 5,
-                                  ),
-                                ],
-                              ),
-                              height: 230,
-                              width: 200,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(8.0)),
-                                    child: CachedNetworkImage(
-                                      width: 200.0,
-                                      height: 170.0,
-                                      fit: BoxFit.fill,
-                                      imageUrl: state.photos!.photos[index]
-                                          .srcImage.originalUrl,
-                                      placeholder: (context, url) =>
-                                          Shimmer.fromColors(
-                                            baseColor: Colors.grey[400]!,
-                                            highlightColor: Colors.grey[200]!,
-                                            child: Container(
-                                              height: 170.0,
-                                              width: 120.0,
-                                              decoration: BoxDecoration(
-                                                color: Colors.black,
-                                                borderRadius:
-                                                BorderRadius.circular(8.0),
-                                              ),
-                                            ),
-                                          ),
-                                      errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
+                          // if(index >= state.photos!.photos.length){
+                          //   return const CupertinoActivityIndicator(color: Colors.orange,);
+                          // }
+                          //    else{
+                          return Container(
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(1, 1),
+                                  blurRadius: 5,
+                                ),
+                              ],
+                            ),
+                            height: 230,
+                            width: 200,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(8.0)),
+                                  child: CachedNetworkImage(
+                                    width: 200.0,
+                                    height: 170.0,
+                                    fit: BoxFit.fill,
+                                    imageUrl: state.photos!.photos[index]
+                                        .srcImage.originalUrl,
+                                    placeholder: (context, url) =>
+                                        Shimmer.fromColors(
+                                      baseColor: Colors.grey[400]!,
+                                      highlightColor: Colors.grey[200]!,
+                                      child: Container(
+                                        height: 170.0,
+                                        width: 120.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                      ),
                                     ),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
                                   ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    state.photos!.photos[index].photographer,
-                                    style: const TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  state.photos!.photos[index].photographer,
+                                  style: const TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          );
+                          //  }
                         },
                       ),
                     ),

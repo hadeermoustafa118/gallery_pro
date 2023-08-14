@@ -2,6 +2,7 @@ class AppConstants{
   static const String apiKey = 'q77ornDyC9TQKrlDn64LbiEEdBAADucKNaXPjc1n0HND1iAxP6je2jcj';
   static const String initialPath= 'https://api.pexels.com/v1';
   static const String curatedPath= '$initialPath/curated';
+  static const String searchPath= '$initialPath/search';
 }
 
 enum RequestState { initial,loading, loaded ,error}

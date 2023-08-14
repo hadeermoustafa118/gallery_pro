@@ -1,9 +1,7 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_pro/domain/usecase/get_photos_usecase.dart';
-
 import '../../core/constants.dart';
 import '../../domain/entities/photos.dart';
 
@@ -43,17 +41,17 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   bool isLoadMore = false;
-
-  Future<void> scrollChecker() async {
-    scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-        emit(state.copyWith(isLoadMore: true));
-        page += 1;
-        log('page number is ${page.toString()}');
-        getAllPhotos();
-        emit(state.copyWith(isLoadMore: false));
-      }
-    });
-  }
+  //
+  // Future<void> scrollChecker() async {
+  //   scrollController.addListener(() {
+  //     if (scrollController.position.pixels ==
+  //         scrollController.position.maxScrollExtent) {
+  //       emit(state.copyWith(isLoadMore: true));
+  //       page += 1;
+  //       log('page number is ${page.toString()}');
+  //       getAllPhotos();
+  //       emit(state.copyWith(isLoadMore: false));
+  //     }
+  //   });
+ // }
 }

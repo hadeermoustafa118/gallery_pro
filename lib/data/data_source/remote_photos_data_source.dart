@@ -8,11 +8,11 @@ import '../../core/error_message_model.dart';
 import '../../core/exception.dart';
 import '../../domain/entities/photos.dart';
 
-abstract class BaseRemoteDataSource {
+abstract class BasePhotosRemoteDataSource {
   Future<Photos> getPhotos(Map <String, dynamic> query);
 }
 
-class RemoteDataSource extends BaseRemoteDataSource {
+class RemotePhotosDataSource extends BasePhotosRemoteDataSource {
   @override
   Future<Photos> getPhotos(Map <String, dynamic> query) async {
     final response = await Dio().get(AppConstants.curatedPath,queryParameters: query,
