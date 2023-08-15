@@ -2,6 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:gallery_pro/core/failure.dart';
 import '../entities/photos.dart';
 
-abstract class BasePhotoRepository{
-  Future<Either<Failure, Photo>> getPhotoByID(int photoId);
+abstract class BasePhotosRepository{
+  Future<Either<Failure, Photos>> getPhotos(Map <String, dynamic> query);
 }

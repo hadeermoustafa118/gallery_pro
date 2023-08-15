@@ -3,6 +3,7 @@ class AppConstants{
   static const String initialPath= 'https://api.pexels.com/v1';
   static const String curatedPath= '$initialPath/curated';
   static const String searchPath= '$initialPath/search';
+  static const String photoByIdPath= '$initialPath/photos/';
 }
 
 enum RequestState { initial,loading, loaded ,error}

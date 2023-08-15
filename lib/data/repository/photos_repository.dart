@@ -6,9 +6,9 @@ import 'package:gallery_pro/data/data_source/remote_photos_data_source.dart';
 
 import 'package:gallery_pro/domain/entities/photos.dart';
 
-import '../../domain/repository/base_photo_repository.dart';
+import '../../domain/repository/base_photos_repository.dart';
 
-class PhotosRepository extends BasePhotoRepository {
+class PhotosRepository extends BasePhotosRepository {
   final BasePhotosRemoteDataSource _baseRemoteDataSource;
 
   PhotosRepository(this._baseRemoteDataSource);

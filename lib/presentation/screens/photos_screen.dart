@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_pro/presentation/cubit/home_cubit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:gallery_pro/presentation/screens/photo_details.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../core/constants.dart';
 import '../../core/service_locator.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class PhotosScreen extends StatelessWidget {
+  const PhotosScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,31 +62,44 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(8.0)),
-                                  child: CachedNetworkImage(
-                                    width: 200.0,
-                                    height: 170.0,
-                                    fit: BoxFit.fill,
-                                    imageUrl: state.photos!.photos[index]
-                                        .srcImage.originalUrl,
-                                    placeholder: (context, url) =>
-                                        Shimmer.fromColors(
-                                      baseColor: Colors.grey[400]!,
-                                      highlightColor: Colors.grey[200]!,
-                                      child: Container(
-                                        height: 170.0,
-                                        width: 120.0,
-                                        decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PhotoDetails(
+                                                  id: state
+                                                      .photos!.photos[index].id,
+                                                )));
+                                    // cubit.getPhotoById(id: state
+                                    //     .photos!.photos[index].id);
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(8.0)),
+                                    child: CachedNetworkImage(
+                                      width: 200.0,
+                                      height: 170.0,
+                                      fit: BoxFit.fill,
+                                      imageUrl: state.photos!.photos[index]
+                                          .srcImage.originalUrl,
+                                      placeholder: (context, url) =>
+                                          Shimmer.fromColors(
+                                        baseColor: Colors.grey[400]!,
+                                        highlightColor: Colors.grey[200]!,
+                                        child: Container(
+                                          height: 170.0,
+                                          width: 120.0,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
                                         ),
                                       ),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
                                     ),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
                                   ),
                                 ),
                                 const SizedBox(
