@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gallery_pro/presentation/component/search_text_field.dart';
 import 'package:gallery_pro/presentation/cubit/search_cubit.dart';
+import 'package:gallery_pro/presentation/screens/photo_details.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../core/constants.dart';
@@ -94,40 +95,58 @@ class SearchScreen extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(8.0)),
-                                                child: CachedNetworkImage(
-                                                  width: 200.0,
-                                                  height: 170.0,
-                                                  fit: BoxFit.fill,
-                                                  imageUrl: state
-                                                      .result!
-                                                      .photos[index]
-                                                      .srcImage
-                                                      .originalUrl,
-                                                  placeholder: (context, url) =>
-                                                      Shimmer.fromColors(
-                                                    baseColor:
-                                                        Colors.grey[400]!,
-                                                    highlightColor:
-                                                        Colors.grey[200]!,
-                                                    child: Container(
-                                                      height: 170.0,
-                                                      width: 120.0,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.black,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
+                                              InkWell(
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(8.0)),
+                                                  child: CachedNetworkImage(
+                                                    width: 200.0,
+                                                    height: 170.0,
+                                                    fit: BoxFit.fill,
+                                                    imageUrl: state
+                                                        .result!
+                                                        .photos[index]
+                                                        .srcImage
+                                                        .originalUrl,
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            Shimmer.fromColors(
+                                                      baseColor:
+                                                          Colors.grey[400]!,
+                                                      highlightColor:
+                                                          Colors.grey[200]!,
+                                                      child: Container(
+                                                        height: 170.0,
+                                                        width: 120.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.black,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
                                                       ),
                                                     ),
+                                                    errorWidget: (context, url,
+                                                            error) =>
+                                                        const Icon(Icons.error),
                                                   ),
-                                                  errorWidget: (context, url,
-                                                          error) =>
-                                                      const Icon(Icons.error),
                                                 ),
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              PhotoDetails(
+                                                                id: state
+                                                                    .result!
+                                                                    .photos[
+                                                                        index]
+                                                                    .id,
+                                                              )));
+                                                },
                                               ),
                                               const SizedBox(
                                                 height: 15,

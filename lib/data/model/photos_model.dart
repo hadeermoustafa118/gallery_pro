@@ -21,12 +21,14 @@ class PhotoModel extends Photo {
       {required super.url,
       required super.id,
       required super.photographer,
+      required super.photographerUrl,
       required super.srcImage});
 
   factory PhotoModel.fromJson(Map<String, dynamic> map) => PhotoModel(
       url: map['url'],
       id: map['id'],
       photographer: map['photographer'],
+      photographerUrl: map['photographer_url'],
       srcImage: SrcImageModel.fromJson(map['src']));
 }
 

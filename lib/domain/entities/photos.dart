@@ -20,10 +20,11 @@ class Photo {
   final int id;
   final String url;
   final String photographer;
+  final String photographerUrl;
   final SrcImage srcImage;
 
   const Photo(
-      {required this.url, required this.id, required this.photographer ,required this.srcImage});
+      {required this.url, required this.id, required this.photographer ,required this.srcImage ,required this.photographerUrl});
 }
 
 
