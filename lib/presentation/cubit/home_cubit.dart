@@ -17,13 +17,14 @@ class HomeCubit extends Cubit<HomeState> {
   final GetPhotosUseCase _getPhotosUseCase;
   final GetPhotoUseCase _getPhotoUseCase;
 
+  int perPage = 20;
   int page = 1;
   ScrollController scrollController = ScrollController();
 
   Future<void> getAllPhotos() async {
     emit(state.copyWith(requestState: RequestState.loading));
     final result = await _getPhotosUseCase.call({
-      'per_page': 10,
+      'per_page': perPage,
       'page': page,
     });
     result.fold((l) {
@@ -59,18 +60,37 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
+  Future<void> getMorePhotos() async {
+    emit(state.copyWith(requestState: RequestState.loading));
+    final result = await _getPhotosUseCase.call({
+      'per_page': perPage+20,
+      'page': page,
+    });
+    result.fold((l) {
+      emit(state.copyWith(
+        message: l.messageFail,
+        requestState: RequestState.error,
+      ));
+    }, (r) {
+      emit(
+        state.copyWith(
+          photos: r,
+          requestState: RequestState.loaded,
+        ),
+      );
+    });
+  }
   bool isLoadMore = false;
 //
-// Future<void> scrollChecker() async {
-//   scrollController.addListener(() {
-//     if (scrollController.position.pixels ==
-//         scrollController.position.maxScrollExtent) {
-//       emit(state.copyWith(isLoadMore: true));
-//       page += 1;
-//       log('page number is ${page.toString()}');
-//       getAllPhotos();
-//       emit(state.copyWith(isLoadMore: false));
-//     }
-//   });
-// }
+Future<void> scrollChecker() async {
+  scrollController.addListener(() {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      emit(state.copyWith(isLoadMore: true));
+      log('per page number is ${perPage.toString()}');
+      getMorePhotos();
+      emit(state.copyWith(isLoadMore: false));
+    }
+  });
+}
 }

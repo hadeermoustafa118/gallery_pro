@@ -18,7 +18,7 @@ class PhotosScreen extends StatelessWidget {
       create: (BuildContext context) => sl<HomeCubit>()..getAllPhotos(),
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
-          //  HomeCubit.get(context).scrollChecker();
+           HomeCubit.get(context).scrollChecker();
         },
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
@@ -36,13 +36,13 @@ class PhotosScreen extends StatelessWidget {
                         mainAxisSpacing: 20,
                         crossAxisSpacing: 15,
                         itemCount:
-                            //state.isLoadMore? state.photos!.photos.length+1:
+                            state.isLoadMore? state.photos!.photos.length+1:
                             state.photos!.photos.length,
                         itemBuilder: (BuildContext context, int index) {
-                          // if(index >= state.photos!.photos.length){
-                          //   return const CupertinoActivityIndicator(color: Colors.orange,);
-                          // }
-                          //    else{
+                          if(index >= state.photos!.photos.length){
+                            return const CupertinoActivityIndicator(color: Colors.orange,);
+                          }
+                             else{
                           return Container(
                             decoration: const BoxDecoration(
                               borderRadius:
@@ -116,7 +116,7 @@ class PhotosScreen extends StatelessWidget {
                               ],
                             ),
                           );
-                          //  }
+                            }
                         },
                       ),
                     ),
